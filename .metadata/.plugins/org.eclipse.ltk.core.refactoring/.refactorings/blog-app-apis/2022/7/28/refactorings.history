@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.shiv.blog&apos; to &apos;com.shiv.blog.main&apos;&#x0A;- Original project: &apos;blog-app-apis&apos;&#x0A;- Original element: &apos;blog-app-apis/src/main/java/com.shiv.blog&apos;&#x0A;- Renamed element: &apos;blog-app-apis/src/main/java/com.shiv.blog.main&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.shiv.blog&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.shiv.blog" name="com.shiv.blog.main" qualified="false" references="true" stamp="1656863372517" textual="false" version="1.0"/>
+</session>

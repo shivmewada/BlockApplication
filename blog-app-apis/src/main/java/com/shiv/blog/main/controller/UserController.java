@@ -3,6 +3,8 @@ package com.shiv.blog.main.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +28,13 @@ public class UserController {
 	private IUserService userService;
 	
 	@PostMapping("/create")
-	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
 		UserDto createUserDto=this.userService.createUser(userDto);
 		return new ResponseEntity<>(createUserDto,HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/update/{userId}")
-	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto ,@PathVariable Integer userId){
+	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto ,@PathVariable Integer userId){
 		UserDto updateUserDto =this.userService.updateUser(userDto, userId);
 		return new ResponseEntity<UserDto>(updateUserDto,HttpStatus.OK);
 	}
@@ -40,8 +42,8 @@ public class UserController {
 	@GetMapping("/delete/{userId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable("userId") Integer uId){
 		this.userService.deleteUser(uId);
-		//return new ResponseEntity(Map.of("message","user deleted sucessfuly"),HttpStatus.OK);
-		return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted successfully",true),HttpStatus.OK);
+		return new ResponseEntity(Map.of("message","user deleted sucessfuly"),HttpStatus.OK);
+		//return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted successfully",true),HttpStatus.OK);
 	}
 	
 	@GetMapping("/getAllUser")

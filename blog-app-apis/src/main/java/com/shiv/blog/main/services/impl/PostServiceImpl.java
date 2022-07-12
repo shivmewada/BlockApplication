@@ -2,6 +2,8 @@ package com.shiv.blog.main.services.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +43,10 @@ public class PostServiceImpl implements IPostService {
 		Post post = this.modelMapper.map(postDto, Post.class);
 		post.setImageName("ab.png");
 		post.setAddedDate(new Date());
-		post.setCategory(category);
 		post.setUser(user);
+		post.setCategory(category);
 		Post createPost = this.postRepo.save(post);
-		return this.modelMapper.map(createPost, PostDto.class);
+		return this.modelMapper.map(createPost,PostDto.class);
 	}
 
 	@Override
@@ -72,15 +74,20 @@ public class PostServiceImpl implements IPostService {
 	}
 
 	@Override
-	public List<Post> getPostByCategory(Integer categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PostDto> getPostByCategory(Integer categoryId) {
+ 
+		Category cat=this.categoryRepo.findById(categoryId).orElseThrow(()->new ResourceNotFoundException("Category","Category Id", categoryId));
+		List<Post> posts=this.postRepo.findByCategory(cat);
+		List<PostDto> listPostDto=posts.stream().map((post)->this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		return listPostDto;
 	}
 
 	@Override
-	public List<Post> getPostByUser(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PostDto> getPostByUser(Integer userId) {
+		User users=this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User","User Id", userId));
+		List<Post> posts=this.postRepo.findByUser(users);
+		List<PostDto> listPostDto=posts.stream().map((post)->this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		return listPostDto;
 	}
 
 	@Override

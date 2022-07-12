@@ -27,11 +27,11 @@ public interface IPostService {
 	
 	// get category by Post
 	
-	List<Post> getPostByCategory(Integer categoryId); 
+	List<PostDto> getPostByCategory(Integer categoryId); 
 	
 	//get user by post
 	
-	List<Post> getPostByUser(Integer userId);
+	List<PostDto> getPostByUser(Integer userId);
 
 	//search post
 	

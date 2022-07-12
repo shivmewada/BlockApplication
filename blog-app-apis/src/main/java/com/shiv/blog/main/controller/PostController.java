@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shiv.blog.main.model.Post;
+import com.shiv.blog.main.payload.ApiResponse;
 import com.shiv.blog.main.payload.PostDto;
 import com.shiv.blog.main.services.IPostService;
 
@@ -45,5 +47,32 @@ public class PostController {
 	public ResponseEntity<List<PostDto>> getPostByCategory(@PathVariable Integer categoryId){
 		List<PostDto> listPost= this.postService.getPostByCategory(categoryId);
 		return new ResponseEntity<List<PostDto>>(listPost,HttpStatus.OK);
+	}
+	// get all post
+	
+	@GetMapping("/getAllPost")
+	public ResponseEntity<List<PostDto>> getAllPost(){
+		List<PostDto> listDto=this.postService.getAllPost();
+		return new ResponseEntity<List<PostDto>>(listDto,HttpStatus.OK);
+	}
+	
+	// get post by Id
+	@GetMapping("/getPostById/{postId}")
+	public ResponseEntity<PostDto> getPostById(@PathVariable Integer postId){
+	  PostDto listDto=this.postService.getSinglePostById(postId);
+		return new ResponseEntity<PostDto>(listDto,HttpStatus.OK);
+	}
+	
+	//delete post
+	@GetMapping("/delete/{postId}")
+	public ApiResponse delete(@PathVariable Integer postId) {
+		this.postService.deletePost(postId);
+		return new ApiResponse("Post deleted successfully....!",true);
+	}
+	// update Post
+	@PostMapping("/update/{postId}")
+	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable Integer postId) {
+		PostDto updateDto=this.postService.updatePost(postDto, postId);
+		return new ResponseEntity<PostDto>(updateDto,HttpStatus.OK);
 	}
 }

@@ -51,26 +51,31 @@ public class PostServiceImpl implements IPostService {
 
 	@Override
 	public PostDto updatePost(PostDto postDto, Integer postId) {
-		// TODO Auto-generated method stub
-		return null;
+		Post existPost =this.postRepo.findById(postId).orElseThrow(()->new ResourceNotFoundException("Post", "Post Id :", postId));
+		existPost.setTitle(postDto.getTitle());
+		existPost.setContain(postDto.getContain());
+		existPost.setImageName(postDto.getImageName());
+		Post updatePost=this.postRepo.save(existPost);
+		return this.modelMapper.map(updatePost, PostDto.class);
 	}
 
 	@Override
 	public void deletePost(Integer postId) {
-		// TODO Auto-generated method stub
-
+		Post post =this.postRepo.findById(postId).orElseThrow(()->new ResourceNotFoundException("Post", "Post Id :", postId));
+	    this.postRepo.delete(post);
 	}
 
 	@Override
-	public List<Post> getAllPost() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PostDto> getAllPost() {
+		List<Post> listAll=this.postRepo.findAll();
+		List<PostDto> listPostDto=listAll.stream().map((post)->this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		return listPostDto;
 	}
 
 	@Override
-	public Post getSinglePostById(Integer postId) {
-		// TODO Auto-generated method stub
-		return null;
+	public PostDto getSinglePostById(Integer postId) {
+		Post post=this.postRepo.findById(postId).orElseThrow(()->new ResourceNotFoundException("POst", "Post Id :", postId));
+		return this.modelMapper.map(post, PostDto.class);
 	}
 
 	@Override

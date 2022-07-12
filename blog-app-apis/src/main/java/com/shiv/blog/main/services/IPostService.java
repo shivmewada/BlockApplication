@@ -19,11 +19,11 @@ public interface IPostService {
 	
 	//Get all post
 	
-	List<Post> getAllPost();
+	List<PostDto> getAllPost();
 	
 	//Single post
 	
-	Post getSinglePostById(Integer postId);
+	PostDto getSinglePostById(Integer postId);
 	
 	// get category by Post
 	

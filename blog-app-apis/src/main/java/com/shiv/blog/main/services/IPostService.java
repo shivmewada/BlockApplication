@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shiv.blog.main.model.Post;
 import com.shiv.blog.main.payload.PostDto;
+import com.shiv.blog.main.payload.PostResponce;
 
 public interface IPostService {
 
@@ -19,7 +20,7 @@ public interface IPostService {
 	
 	//Get all post
 	
-	List<PostDto> getAllPost();
+	PostResponce getAllPost(Integer pageNumber,Integer pageSize,String sortBy,String sortDir);
 	
 	//Single post
 	
@@ -27,13 +28,13 @@ public interface IPostService {
 	
 	// get category by Post
 	
-	List<PostDto> getPostByCategory(Integer categoryId); 
+	PostResponce getPostByCategory(Integer categoryId,Integer postNumber,Integer postSize); 
 	
 	//get user by post
 	
-	List<PostDto> getPostByUser(Integer userId);
+	PostResponce getPostByUser(Integer userId,Integer postNumber,Integer postSize);
 
 	//search post
 	
-	List<Post> serachPosts(String keyword);
+	List<PostDto> serachPosts(String keyword);
 }

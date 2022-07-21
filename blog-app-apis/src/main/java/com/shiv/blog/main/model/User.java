@@ -1,7 +1,9 @@
 package com.shiv.blog.main.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,5 +43,8 @@ public class User {
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Post> posts =new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	private Set<Comment> comments=new HashSet<Comment>();
 
 }

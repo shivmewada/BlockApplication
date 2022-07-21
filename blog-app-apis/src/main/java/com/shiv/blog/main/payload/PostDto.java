@@ -1,6 +1,10 @@
 package com.shiv.blog.main.payload;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.shiv.blog.main.model.Comment;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +22,6 @@ public class PostDto {
 	private Date addedDate;
 	private CategoryDto category;
 	private UserDto user;
+	private Set<CommentsDto> comments=new HashSet<>();
 	
 }
